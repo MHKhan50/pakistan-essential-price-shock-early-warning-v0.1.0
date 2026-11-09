@@ -64,7 +64,7 @@ python3 -m scripts.prepare_data --input data/raw/weekly_spi_city_item_prices.csv
 python3 -m scripts.run_experiment --input data/processed/weekly_prices_clean.csv --out results/official_spi
 ```
 
-The fetch step verifies the pinned file checksum and fails closed if the downloaded bytes differ. If the upstream curator replaces the file, review its provenance and update the pinned revision/checksum deliberately rather than bypassing verification.
+The fetch step verifies the pinned file checksum and fails closed if the downloaded bytes differ. If Python's download is refused or returns different bytes, download the same URL with `curl -L` and check it with `shasum -a 256` (expected `010b8bf4…`). If the upstream curator replaces the file, review its provenance and update the pinned revision/checksum deliberately rather than bypassing verification.
 
 ## Outputs
 
@@ -84,7 +84,7 @@ The `WATCH` state is raised when the upper prediction bound reaches the configur
 
 ## Reproducibility and evaluation
 
-The data pipeline keeps only rows with `price_type=avg`, `availability_status=reported`, and a finite positive `price_pkr`. It rejects duplicate city–item–week keys. Forecast examples require six consecutive weekly observations: four lagged weekly returns, the current price and the next week's price. Missing weeks are not interpolated.
+The data pipeline keeps only rows with `price_type=avg`, `availability_status=reported`, and a finite positive `price_pkr`. It rejects duplicate city–item–week keys. Forecast examples require six consecutive weekly observations: four lagged weekly returns, the current price and the next week's price. Missing weeks are not interpolated. PBS releases sometimes move by a day around public holidays, so consecutive releases 6 to 8 days apart count as consecutive weeks; a longer gap (a missing release) breaks the window.
 
 The default experiment sorts unique forecast-origin weeks and uses the earliest 60% for fitting, the next 20% for residual calibration, and the final 20% for the untouched test. All features are historical at forecast time. The ridge model is fitted on the training block only; conformal residual quantiles are estimated on the subsequent calibration block only. No random row split is used.
 

@@ -12,7 +12,7 @@ EXPECTED_SHA256 = "010b8bf43458bc5751c933a4516cc3c9888457df4560ec5db2e635c842089
 
 def fetch(output: Path) -> str:
     output.parent.mkdir(parents=True, exist_ok=True)
-    request = urllib.request.Request(URL, headers={"User-Agent": "PakPriceSentinel/0.1.0 research-data-fetcher"})
+    request = urllib.request.Request(URL, headers={"User-Agent": "curl/8.4.0", "Accept": "*/*"})
     digest = hashlib.sha256()
     fd, temp_name = tempfile.mkstemp(prefix="pakprices-", suffix=".csv", dir=str(output.parent))
     os.close(fd)

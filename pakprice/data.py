@@ -152,6 +152,10 @@ def load_canonical_csv(path: Path) -> List[PriceObservation]:
     return observations
 
 
+MIN_GAP_DAYS = 6
+MAX_GAP_DAYS = 8
+
+
 def build_examples(
     observations: Sequence[PriceObservation], shock_threshold: float = 0.05
 ) -> List[ForecastExample]:
@@ -168,7 +172,10 @@ def build_examples(
         series = sorted(grouped[group], key=lambda x: x.week_end_date)
         for index in range(4, len(series) - 1):
             window = series[index - 4:index + 2]
-            if any((window[j + 1].week_end_date - window[j].week_end_date).days != 7 for j in range(5)):
+            # PBS releases are weekly but some move by a day around holidays (6- or 8-day gaps);
+            # a gap outside MIN_GAP_DAYS..MAX_GAP_DAYS means a missing release, so the window is skipped.
+            if any(not MIN_GAP_DAYS <= (window[j + 1].week_end_date - window[j].week_end_date).days <= MAX_GAP_DAYS
+                   for j in range(5)):
                 continue
             current = series[index]
             following = series[index + 1]
