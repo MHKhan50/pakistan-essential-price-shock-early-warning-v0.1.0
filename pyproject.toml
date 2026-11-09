@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pakistan-essential-price-shock-early-warning"
+version = "0.1.0"
+description = "Leakage-safe city-item price-shock forecasting research prototype for Pakistan PBS SPI data"
+requires-python = ">=3.9"
+license = {file = "LICENSE"}
+readme = "README.md"
+authors = [{name = "Masmatix Innovations Research Team"}]
+dependencies = []
+
+[tool.setuptools]
+packages = ["pakprice", "scripts"]
