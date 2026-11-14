@@ -1,5 +1,7 @@
 # PakPriceSentinel
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24229151.svg)](https://doi.org/10.5281/zenodo.24229151)
+
 **Leakage-safe, cross-city early warning of essential-item price shocks in Pakistan**  
 Version: `0.1.0` · Research prototype · 9 November 2026
 

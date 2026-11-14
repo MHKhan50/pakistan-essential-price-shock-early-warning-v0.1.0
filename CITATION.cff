@@ -2,6 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below. Cite the underlying PBS data separately and review its source terms."
 title: "PakPriceSentinel: Leakage-Safe Early Warning of Essential-Item Price Shocks in Pakistan"
 version: 0.1.0
+doi: 10.5281/zenodo.24229151
 date-released: 2026-11-09
 type: software
 license: MIT
