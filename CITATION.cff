@@ -6,4 +6,7 @@ date-released: 2026-11-09
 type: software
 license: MIT
 authors:
-  - name: "Masmatix Innovations Research Team"
+  - family-names: Hussain
+    given-names: Muzammal
+    orcid: "https://orcid.org/0009-0001-2570-5686"
+repository-code: "https://github.com/MHKhan50/pakistan-essential-price-shock-early-warning-v0.1.0"
